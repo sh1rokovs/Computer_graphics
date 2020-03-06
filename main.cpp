@@ -10,7 +10,6 @@ int main(int argc, char *argv[])
 {
 	string s;
 	QImage photo;
-
 	Invert_filter* invert = new Invert_filter();
 
 	for (int i = 0; i < argc; i++)

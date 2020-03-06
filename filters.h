@@ -50,3 +50,50 @@ QImage Invert_filter::calculateNewImagePixMap(const QImage& photo, int radius)
 		}
 	return result_Image;
 }
+class Matrix_filter : public filter
+{
+public:
+	float* vector;
+	int mRadius;
+public:
+	Matrix_filter(int radius = 1) : mRadius(radius) {};
+public:
+	QImage calculateNewImagePixMap(const QImage& photo, int radius);
+	QColor calculateNewPixelColor(QImage photo, int x, int y, int radius);
+};
+
+QColor Matrix_filter::calculateNewPixelColor(QImage photo, int x, int y, int radius)
+{
+	int returnR = 0;
+	int returnG = 0;
+	int returnB = 0;
+	int size = 2 * radius + 1;
+
+	for(int i = -radius; i <= radius; i++)
+		for (int j = -radius; j <= radius; j++)
+		{
+			int idx = (i + radius) * size + j + radius;
+
+			QColor color = photo.pixelColor(clamp<int>(x + j, photo.width() - 1, 0),
+											clamp<int>(y + i, photo.height() - 1, 0));
+			returnR += color.red() * vector[idx];
+			returnG += color.green() * vector[idx];
+			returnB += color.blue() * vector[idx];
+		}
+	return QColor(clamp(returnR, 255, 0),
+		clamp(returnG, 255, 0),
+		clamp(returnB, 255, 0));
+}
+
+class Blur_filter : public Matrix_filter
+{
+public:
+	Blur_filter()
+	{
+		int size = 2 * mRadius + 1;
+		vector = new float[size * size];
+		for (int i = 0; i < size; i++)
+			for (int j = 0; j < size; j++)
+				vector[i * size + j] = 1.0f / (size * size);
+	}
+};
