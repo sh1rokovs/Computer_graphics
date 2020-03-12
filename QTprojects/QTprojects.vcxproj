@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7BA82BC5-6B40-4142-840E-741BF8D6E9CC}</ProjectGuid>
+    <ProjectGuid>{C586BBF7-1852-42CA-8AD3-C456A585FB10}</ProjectGuid>
     <Keyword>QtVS_v302</Keyword>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>

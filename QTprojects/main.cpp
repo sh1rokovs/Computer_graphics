@@ -6,11 +6,12 @@
 
 using namespace std;
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	string s;
 	QImage photo;
 	Invert_filter* invert = new Invert_filter();
+	Blur_filter* blur = new Blur_filter();
 
 	for (int i = 0; i < argc; i++)
 	{
@@ -23,4 +24,6 @@ int main(int argc, char *argv[])
 
 	QImage invertImage = invert->calculateNewImagePixMap(photo, 0);
 	invertImage.save("Invert.jpg");
+	QImage blurImage = blur->calculateNewImagePixMap(photo, 0);
+	blurImage.save("blur.jpg");
 }
